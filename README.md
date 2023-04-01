@@ -90,7 +90,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
     context.addServletContainerInitializer(new JasperInitializer(), null);
 ```
 5. JDTCompiler 编译错误修改，注释吊编译错误的行
-6. 配置管理员账号信息
+6. 配置管理员账号信息 conf/tomcat-users.xml
 ```xml
     <user username="admin" password="tomcat" roles="manager-gui"/>
     <user username="robot" password="tomcat" roles="manager-script"/>
