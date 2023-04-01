@@ -79,3 +79,40 @@ instructions for reporting a bug
 ### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
+
+### 本地调试
+1. 下载 Tomcat 10
+2. 添加pom.xml
+3. tomcat 依赖 [jakartaee-migration](https://github.com/apache/tomcat-jakartaee-migration) maven 仓没有，需要GitHub 下载本地 mvn install
+4. jsp 错误修改
+```java
+    webConfig();
+    context.addServletContainerInitializer(new JasperInitializer(), null);
+```
+5. JDTCompiler 编译错误修改，注释吊编译错误的行
+6. 配置管理员账号信息
+```xml
+    <user username="admin" password="tomcat" roles="manager-gui"/>
+    <user username="robot" password="tomcat" roles="manager-script"/>
+    <role rolename="tomcat"/>
+    <role rolename="role1"/>
+    <user username="tomcat" password="tomcat" roles="tomcat"/>
+    <user username="both" password="tomcat" roles="tomcat,role1"/>
+    <user username="role1" password="tomcat" roles="role1"/>
+    <role rolename="admin-gui"/>
+    <role rolename="admin-script"/>
+    <role rolename="manager-gui"/>
+    <role rolename="manager-script"/>
+    <role rolename="manager-jmx"/>
+    <role rolename="manager-status"/>
+    <user password="tomcat" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-script,admin-gui" username="tomcat"/>
+```
+7. 调试启动参数配置
+```shell
+   -Dcatalina.home="E:\code\java\github\tomcat\apache-tomcat-10.1.7\catalina-home"
+   -Duser.language=en
+   -Duser.region=US
+   -Dfile.encoding=UTF-8
+   -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+   -Djava.util.logging.config.file=E:\code\java\github\tomcat\apache-tomcat-10.1.7\catalina-home\conf\logging.properties
+```
